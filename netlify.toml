@@ -1,0 +1,14 @@
+# ==========================================
+# ตั้งค่าการ deploy บน Netlify
+# ==========================================
+[build]
+  command = "npm run build" # คำสั่ง build (tsc -b && vite build)
+  publish = "dist"          # โฟลเดอร์ผลลัพธ์ที่ Vite สร้างให้
+
+# SPA Fallback: ทุก URL ให้ส่ง index.html กลับไป แล้วให้ React Router เลือกหน้าเอง
+# ถ้าไม่มีส่วนนี้ เปิด /library/3 ตรงๆ หรือกด F5 จะเจอ 404 ของ Netlify (ไม่ใช่ NotFoundPage ของเรา)
+# status = 200 คือ "rewrite" (URL บน address bar ไม่เปลี่ยน) ไม่ใช่ redirect
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
